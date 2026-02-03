@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .contact-card {
+            background: var(--surface-color);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        .detail-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+        }
+
+        .detail-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+
+        .detail-link:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">PORTFOLIO</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <main>
+        <section class="contact-section fade-in">
+            <div class="contact-container">
+                <h1 class="contact-title">Get In Touch</h1>
+                <p style="margin-bottom: 3rem; color: var(--text-secondary);">
+                    Available for commissions and collaborations.
+                </p>
+
+                <div class="contact-card">
+                    <div class="detail-item">
+                        <span class="detail-label">Artist</span>
+                        <div class="detail-value">Karel Earl P. Ignacio</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Location</span>
+                        <div class="detail-value">Taguig, Manila PH</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Phone</span>
+                        <div class="detail-value">+63 926 053 8560</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <a href="mailto:ignaciokarelearl@gmail.com"
+                            class="detail-value detail-link">ignaciokarelearl@gmail.com</a>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">JobStreet Profile</span>
+                        <a href="https://ph.jobstreet.com/profiles/karelearl-ignacio-1TsPnYFPKp" target="_blank"
+                            class="detail-value detail-link">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

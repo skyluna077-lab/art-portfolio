@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">PORTFOLIO</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <main>
+        <header class="gallery-header fade-in">
+            <h1>Artworks</h1>
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All</button>
+                <button class="tab-btn" data-category="Photography">Photography</button>
+                <button class="tab-btn" data-category="Traditional Art">Traditional Art</button>
+                <button class="tab-btn" data-category="Digital Art">Digital Art</button>
+                <button class="tab-btn" data-category="Mockup Designs">Mockup Designs</button>
+                <button class="tab-btn" data-category="Illustrations">Illustrations</button>
+            </div>
+        </header>
+
+        <section class="gallery-section">
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="artwork-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-image-container">
+                <img src="" alt="" id="modal-img">
+            </div>
+            <div class="modal-details">
+                <span class="modal-category" id="modal-category">Category</span>
+                <h3 class="modal-title" id="modal-title">Title</h3>
+                <p class="modal-description" id="modal-description">Description goes here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { galleryData } from './gallery-data.js';
+
+        // Reuse mobile menu logic (copy-paste from script.js simpler than export/import conflict handling for now)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                // Basic hamburger animation
+                const spans = menuToggle.querySelectorAll('span');
+                if (navLinks.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+        }
+
+        // Gallery Logic
+        const grid = document.getElementById('gallery-grid');
+        const tabs = document.querySelectorAll('.tab-btn');
+        const modal = document.getElementById('artwork-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCat = document.getElementById('modal-category');
+        const modalDesc = document.getElementById('modal-description');
+        const modalClose = document.querySelector('.modal-close');
+
+        function renderGallery(filter = 'all') {
+            grid.classList.add('fading');
+            setTimeout(() => {
+                grid.innerHTML = '';
+                const filteredData = filter === 'all'
+                    ? galleryData
+                    : galleryData.filter(item => item.category === filter);
+
+                filteredData.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'gallery-item'; // Reusing style.css .gallery-item
+                    el.innerHTML = `
+                        <img src="${item.src}" alt="${item.title}" loading="lazy">
+                        <div class="overlay">
+                            <h3>${item.title}</h3>
+                            <p>${item.category}</p>
+                        </div>
+                    `;
+                    el.addEventListener('click', () => openModal(item));
+                    grid.appendChild(el);
+                });
+                grid.classList.remove('fading');
+            }, 200);
+        }
+
+        function openModal(item) {
+            modalImg.src = item.src;
+            modalTitle.textContent = item.title;
+            modalCat.textContent = item.category;
+            modalDesc.textContent = item.description;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Tabs
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderGallery(tab.dataset.category);
+            });
+        });
+
+        // Initial Render
+        renderGallery();
+
+    </script>
+</body>
+
+</html>

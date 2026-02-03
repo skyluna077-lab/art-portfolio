@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-section {
+            padding: 15vh 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            min-height: 100vh;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 4px;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-color);
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover::after {
+            transform: translate(10px, 10px);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        @media(max-width: 900px) {
+            .about-section {
+                flex-direction: column;
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">PORTFOLIO</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <main>
+        <section class="about-section fade-in">
+            <div class="about-image">
+                <img src="Portfolio/profile.jpeg" alt="Artist Profile">
+            </div>
+            <div class="about-content">
+                <h1>Behind the <span style="color: var(--accent-color)">Art</span></h1>
+                <p>Hello! I am a passionate artist dedicated to capturing the subtle nuances of life through various
+                    mediums. With a focus on emotional resonance and visual storytelling, my work aims to bridge the gap
+                    between reality and imagination.</p>
+                <p>My journey began with a pencil and paper, and has evolved into a multi-disciplinary exploration of
+                    digital art, photography, and traditional painting. I believe that every stroke, every capture,
+                    holds a piece of a larger narrative waiting to be told.</p>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
